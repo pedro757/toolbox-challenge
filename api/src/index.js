@@ -1,9 +1,11 @@
 const express = require('express')
 const axios = require('axios').default
 axios.defaults.headers.common.Authorization = 'Bearer aSuperSecretKey'
+const cors = require('cors')
 
 const URL = 'https://echo-serv.tbxnet.com/v1'
 const app = express()
+app.use(cors())
 const port = 3000
 
 app.get('/files/data', async (_, res) => {
