@@ -14,7 +14,7 @@ app.get('/files/data', async (_, res) => {
     for (let file of files) {
       try {
         const { data: content } = await axios.get(URL + "/secret/file/" + file)
-        const formattedFile = FormatFile(content)
+        const formattedFile = formatFile(content)
         if (formattedFile) formattedFiles.push(formattedFile);
       } catch {
         continue
@@ -26,7 +26,7 @@ app.get('/files/data', async (_, res) => {
   }
 })
 
-function FormatFile(content) {
+function formatFile(content) {
   const lines = content.split("\n")
   let fileName = ""
   const formattedlines = []
@@ -60,3 +60,7 @@ function FormatFile(content) {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+module.exports = {
+  formatFile: formatFile
+}
