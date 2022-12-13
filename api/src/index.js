@@ -1,21 +1,20 @@
 const express = require('express')
-const axios = require('axios').default;
-axios.defaults.headers.common['Authorization'] = "Bearer aSuperSecretKey"
+const axios = require('axios').default
+axios.defaults.headers.common.Authorization = 'Bearer aSuperSecretKey'
 
-const URL = "https://echo-serv.tbxnet.com/v1"
+const URL = 'https://echo-serv.tbxnet.com/v1'
 const app = express()
 const port = 3000
 
-
 app.get('/files/data', async (_, res) => {
   try {
-    const { data: { files } } = await axios.get(URL + "/secret/files")
+    const { data: { files } } = await axios.get(URL + '/secret/files')
     const formattedFiles = []
-    for (let file of files) {
+    for (const file of files) {
       try {
-        const { data: content } = await axios.get(URL + "/secret/file/" + file)
+        const { data: content } = await axios.get(URL + '/secret/file/' + file)
         const formattedFile = formatFile(content)
-        if (formattedFile) formattedFiles.push(formattedFile);
+        if (formattedFile) formattedFiles.push(formattedFile)
       } catch {
         continue
       }
@@ -26,18 +25,16 @@ app.get('/files/data', async (_, res) => {
   }
 })
 
-function formatFile(content) {
-  const lines = content.split("\n")
-  let fileName = ""
+function formatFile (content) {
+  const lines = content.split('\n')
+  let fileName = ''
   const formattedlines = []
 
-  for (let line of lines) {
-    if (line === "file,text,number,hex")
-      continue;
-    const splittedLine = line.split(",")
-    if (splittedLine.length !== 4)
-      continue;
-    const [file, text, number, hex] = splittedLine;
+  for (const line of lines) {
+    if (line === 'file,text,number,hex') { continue }
+    const splittedLine = line.split(',')
+    if (splittedLine.length !== 4) { continue }
+    const [file, text, number, hex] = splittedLine
 
     fileName = file
 
@@ -48,8 +45,7 @@ function formatFile(content) {
     })
   }
 
-  if (!formattedlines.length)
-    return;
+  if (!formattedlines.length) { return }
 
   return {
     file: fileName,
@@ -62,5 +58,5 @@ app.listen(port, () => {
 })
 
 module.exports = {
-  formatFile: formatFile
+  formatFile
 }
