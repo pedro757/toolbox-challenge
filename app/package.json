@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "rm -rf dist && mkdir -p dist && cp ./public/index.html dist/ && npm run build && webpack serve --mode development"
+    "build": "rm -rf dist && mkdir -p dist && cp ./public/index.html dist/ && webpack --mode production",
+    "start": "npm run build && webpack serve --mode development"
   },
   "keywords": [],
   "author": "",
