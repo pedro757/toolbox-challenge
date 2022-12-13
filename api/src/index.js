@@ -53,6 +53,15 @@ function formatFile (content) {
   }
 }
 
+app.get('/files/list', async (_, res) => {
+  try {
+    const { data } = await axios.get(URL + '/secret/files')
+    res.json(data)
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
