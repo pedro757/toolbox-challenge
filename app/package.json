@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "rm -rf build && mkdir -p build && cp ./public/index.html build/ && npm run build && webpack serve --mode development"
+    "start": "rm -rf dist && mkdir -p dist && cp ./public/index.html dist/ && npm run build && webpack serve --mode development"
   },
   "keywords": [],
   "author": "",

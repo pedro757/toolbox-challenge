@@ -5,12 +5,12 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname,
-      'build')
+      'dist')
   },
   devServer: {
     static: {
       directory: path.join(__dirname,
-        'build')
+        'dist')
     },
     port: 8000
   },
