@@ -7,7 +7,7 @@ const app = express()
 const port = 3000
 
 
-app.get('/files/data', async (_, res, next) => {
+app.get('/files/data', async (_, res) => {
   try {
     const { data: { files } } = await axios.get(URL + "/secret/files")
     const formattedFiles = []
@@ -22,7 +22,7 @@ app.get('/files/data', async (_, res, next) => {
     }
     res.json(formattedFiles)
   } catch (err) {
-    return next(err)
+    console.log(err)
   }
 })
 
